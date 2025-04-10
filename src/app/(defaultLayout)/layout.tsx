@@ -1,5 +1,7 @@
-
 import { Metadata } from "next";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/shared/AppSidebar";
+import Navbar from "@/components/shared/Navbar";
 
 export const metadata: Metadata = {
   title: "Insightify",
@@ -8,9 +10,14 @@ export const metadata: Metadata = {
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
-      <div className="max-w-[1372px] mx-auto md:py-5 md:px-0 px-3">{children}</div>
-    </main>
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="px-16 bg-gradient-to-t from-[#EEEFDA] to-[#D2DBDD] w-full">
+        <SidebarTrigger />
+        <Navbar />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 };
 
