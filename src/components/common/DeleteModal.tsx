@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
@@ -8,10 +9,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 // import { useDeleteRastaurantMutation } from "@/redux/features/restaurant/rastaurant.api";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 interface DeleteModalProps {
   id: string;
@@ -22,34 +23,34 @@ interface DeleteModalProps {
 const DeleteModal = ({ id, type, btn }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
   //   const [deletRestaurant] = useDeleteRastaurantMutation();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleDelete = async () => {
-    const toastId = toast.loading(`Deleting...`);
-    try {
-      let res;
-      if (type === "restaurent") {
-        // res = await deletRestaurant(id).unwrap();
-      } else if (type === "user") {
-        // res = await deleteCause(id).unwrap();
-      }
+  // const handleDelete = async () => {
+  //   const toastId = toast.loading(`Deleting...`);
+  //   try {
+  //     let res;
+  //     if (type === "restaurent") {
+  //       // res = await deletRestaurant(id).unwrap();
+  //     } else if (type === "user") {
+  //       // res = await deleteCause(id).unwrap();
+  //     }
 
-      if (res.data) {
-        toast.success("Deleted Successfully", { id: toastId });
-        setOpen(false);
-        router.push("/");
-      } else {
-        toast.error(res?.error?.data?.message || "Failed to Delete", {
-          id: toastId,
-        });
-        setOpen(false);
-      }
-    } catch (err: any) {
-      toast.error(err?.data?.message || `Failed to delete ${type}`, {
-        id: toastId,
-      });
-    }
-  };
+  //     if (res.data) {
+  //       toast.success("Deleted Successfully", { id: toastId });
+  //       setOpen(false);
+  //       router.push("/");
+  //     } else {
+  //       toast.error(res?.error?.data?.message || "Failed to Delete", {
+  //         id: toastId,
+  //       });
+  //       setOpen(false);
+  //     }
+  //   } catch (err: any) {
+  //     toast.error(err?.data?.message || `Failed to delete ${type}`, {
+  //       id: toastId,
+  //     });
+  //   }
+  // };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {btn === "icon" ? (
