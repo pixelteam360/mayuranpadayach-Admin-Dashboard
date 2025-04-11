@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/sidebar";
 import logo from "../../assets/iamges/logo.png";
 import {
-  Calendar,
   SquareUser,
   UserRoundX,
   Settings,
   ClipboardMinus,
   LayoutDashboardIcon,
+  Contact,
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -29,27 +29,27 @@ const items = [
   },
   {
     title: "Report",
-    url: "#",
+    url: "/report",
     icon: ClipboardMinus,
   },
   {
     title: "Profile",
-    url: "#",
-    icon: Calendar,
+    url: "/profile",
+    icon: Contact,
   },
   {
     title: "User",
-    url: "#",
+    url: "/user",
     icon: SquareUser,
   },
   {
     title: "Remove",
-    url: "#",
+    url: "/remove",
     icon: UserRoundX,
   },
   {
     title: "Setting",
-    url: "#",
+    url: "/setting",
     icon: Settings,
   },
 ];

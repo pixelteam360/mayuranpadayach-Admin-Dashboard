@@ -14,17 +14,18 @@ export default {
   			background: "bg-gradient-to-r from-[#D2DBDD] to-[#EEEFDA]",
   			foreground: 'hsl(var(--foreground))',
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				DEFAULT: '#1C1C1C',
+  				foreground: '#1C1C1C'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: '#EA3526',
+  				foreground: '#EA3526'
   			},
   			success: '#102F22',
   			info: '#D9F4F9',
   			warning: '#FAE4D0',
   			danger: '#d7191c',
+			grayText: '#797D8C',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
