@@ -1,7 +1,14 @@
+'use client'
+import { useOverViewQuery } from "@/redux/features/user/user.api";
 import { ClipboardMinus, Contact, TriangleAlert, Users } from "lucide-react";
 import React from "react";
 
 const OverView = () => {
+  const { data } = useOverViewQuery(undefined);
+
+
+  const overView = data?.data
+
   return (
     <div>
       <div className="grid grid-cols-4 gap-7">
@@ -10,10 +17,7 @@ const OverView = () => {
             <Users />
             <p className="text-grayText">Total User</p>
           </div>
-          <h1 className="text-[32px] font-bold">1,200</h1>
-          {/* <button className="bg-gradient-to-t from-[#EEEFDA] to-[#D2DBDD] w-10 h-10 rounded-full flex justify-center items-center">
-              <MoveUpRight />
-            </button> */}
+          <h1 className="text-[32px] font-bold">{overView?.totalUser}</h1>
         </div>
 
         <div className="bg-white p-6 rounded-2xl flex justify-between gap-2">
@@ -21,7 +25,7 @@ const OverView = () => {
             <Contact />
             <p className="text-grayText">Total Flag Profile</p>
           </div>
-          <h1 className="text-[32px] font-bold">900</h1>
+          <h1 className="text-[32px] font-bold">{overView?.totalProfile}</h1>
         </div>
 
         <div className="bg-white p-6 rounded-2xl flex justify-between gap-2">
@@ -29,7 +33,7 @@ const OverView = () => {
             <ClipboardMinus />
             <p className="text-grayText">Total Report</p>
           </div>
-          <h1 className="text-[32px] font-bold">2,200</h1>
+          <h1 className="text-[32px] font-bold">{overView?.totalReviewReport}</h1>
         </div>
 
         <div className="bg-white p-6 rounded-2xl flex justify-between gap-2">
@@ -37,9 +41,8 @@ const OverView = () => {
             <TriangleAlert />
             <p className="text-grayText">Remove Request</p>
           </div>
-          <h1 className="text-[32px] font-bold">400</h1>
+          <h1 className="text-[32px] font-bold">{overView?.totalProfileReport}</h1>
         </div>
-        
       </div>
     </div>
   );

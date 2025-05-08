@@ -1,41 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import { Button } from "@/components/ui/button";
 import userIcon from "../../../assets/placeholders/user-placeholder.jpg";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { MoreVertical } from "lucide-react";
+import { useProfilesQuery } from "@/redux/features/profile/profile.api";
+import Spinner from "@/components/common/Spinner";
+import DeleteModal from "@/components/common/DeleteModal";
 
-const users = [
-  {
-    name: "Cordell Edwards",
-    image: "/avatar1.jpg",
-    flag: "Red Flag",
-    products: 95,
-    address: "227 Brookview Drive Beaumont, TX 77701",
-  },
-  {
-    name: "Derrick Spencer",
-    image: "/avatar2.jpg",
-    flag: "Red Flag",
-    products: 120,
-    address: "227 Brookview Drive Beaumont, TX 77701",
-  },
-  {
-    name: "Larissa Burton",
-    image: "/avatar3.jpg",
-    flag: "Red Flag",
-    products: 120,
-    address: "227 Brookview Drive Beaumont, TX 77701",
-  },
-];
+type FlagCounts = {
+  redFlag: number;
+  yellowFlag: number;
+  greenFlag: number;
+};
 
 const TopFlagUserTable = () => {
+  const { data, isFetching } = useProfilesQuery(undefined);
+
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  const profileData = data?.data?.data;
+
   return (
-    <div>
+    <div className="mb-12">
       <div className="overflow-x-auto">
         <div className="min-w-[700px]">
           {/* Header */}
@@ -49,27 +43,34 @@ const TopFlagUserTable = () => {
 
           {/* Rows */}
           <div className="space-y-4 mt-2">
-            {users.map((user, idx) => (
+            {profileData.map((item: any) => (
               <div
-                key={idx}
+                key={item.id}
                 className="grid grid-cols-5 items-center gap-4 bg-white/30 px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-center gap-3">
                   <Image
-                    src={userIcon}
+                    src={item.image || userIcon}
                     alt="user"
                     width={100}
                     height={100}
                     className="h-10 w-10 rounded-full"
                   />
-                  <span className="text-gray-800 font-medium">{user.name}</span>
+                  <span className="text-gray-800 font-medium">
+                    {item?.fullName}
+                  </span>
                 </div>
 
-                <div className="font-bold">{user.flag}</div>
+                <div className="font-bold">
+                  {Object.entries((item?.flagCounts as FlagCounts) || {})
+                    .sort((a, b) => b[1] - a[1])[0]?.[0]
+                    ?.replace("Flag", "")
+                    ?.toUpperCase() || "N/A"}
+                </div>
 
-                <div className="text-gray-500">{user.products} Products</div>
+                <div className="text-gray-500">{item?.maritalStatus} </div>
 
-                <div className="text-gray-700 text-sm">{user.address}</div>
+                <div className="text-gray-700 text-sm">{item?.location}</div>
 
                 <div className="text-gray-400 text-xl cursor-pointer flex justify-end">
                   <DropdownMenu>
@@ -80,9 +81,12 @@ const TopFlagUserTable = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>View details</DropdownMenuItem>
-                      <DropdownMenuItem>Edit customer</DropdownMenuItem>
-                      <DropdownMenuItem>Remove flag</DropdownMenuItem>
+                        <DeleteModal
+                          id={item.id}
+                          btn="btn"
+                          btnText="Delete Profile"
+                          type="profile"
+                        />
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>

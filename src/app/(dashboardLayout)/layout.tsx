@@ -3,8 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/shared/AppSidebar";
 
 export const metadata: Metadata = {
-  title: "Insightify",
-  description: "Transform Voice, Images, and Videos into Text",
+  title: "Check Mate",
 };
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {

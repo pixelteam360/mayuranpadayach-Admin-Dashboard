@@ -1,12 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import Image from "next/image";
 import userIcon from "../../../assets/placeholders/user-placeholder.jpg";
 import DeleteModal from "@/components/common/DeleteModal";
+import { useReviewReportsQuery } from "@/redux/features/reviewAndPost/reviewAndPost.api";
+import Spinner from "@/components/common/Spinner";
 
 const ReportCard = () => {
-  const item = [1, 2, 3, 4, 5, 6];
+  const { data, isFetching } = useReviewReportsQuery(undefined);
+
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  const item = data?.data;
   return (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
-      {item.map((item, idx) => (
+      {item.map((item: any, idx: number) => (
         <div
           key={idx}
           className="bg-[#eef1ed] p-4 grid grid-cols-4 rounded-3xl border border-white gap-1"
@@ -19,24 +29,28 @@ const ReportCard = () => {
                 width={100}
                 height={100}
                 className="h-10 w-10 rounded-full"
-              />
-              <p className="font-medium">Anonymous 001</p>
+              />  
+              <p className="font-medium">Anonymous 00{idx + 1}</p>
             </div>
             <p className="text-[#B8B8B8] line-clamp-4 text-[14px]">
-              Started off really charming, but over time became super
-              possessive. Would constantly check my phone and get upset if I
-              didn’t reply fast enough. Be careful!
+              {item?.review?.message}
             </p>
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between gap-3">
             <Image
-              src={userIcon}
+              src={item?.review?.profile?.image || userIcon}
               alt="user"
               width={1000}
               height={1000}
-              className="rounded-3xl"
+              className="rounded-3xl w-full h-full"
             />
-            <DeleteModal btn="btn" type="user" id=""/>
+            <DeleteModal
+              btn="btn"
+              type="user"
+              id={item?.id}
+              btnText="View"
+              message={item.message}
+            />
           </div>
         </div>
       ))}

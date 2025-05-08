@@ -2,6 +2,7 @@
 "use client";
 import MyFormInput from "@/components/form/MyFormInput";
 import MyFormWrapper from "@/components/form/MyFormWrapper";
+import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
@@ -15,7 +16,7 @@ interface ChangePasswordFormData {
 }
 
 const ChangePasswordForm = () => {
-  // const [changePass] = useChangePasswordMutation();
+  const [changePass] = useChangePasswordMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -30,13 +31,15 @@ const ChangePasswordForm = () => {
       toast.success("Password changed successfully", { id: toastId });
       router.push("/login");
     } catch (err: any) {
-      toast.error(err.data?.message || "Failed to change password");
+      toast.error(err.data?.message || "Failed to change password", {
+        id: toastId,
+      });
     }
   };
   return (
     <MyFormWrapper onSubmit={onSubmit}>
       <h3 className="md:text-2xl text-lg font-medium text-start">
-        New Password
+        Old Password
       </h3>
       <div className="relative">
         <MyFormInput
@@ -49,7 +52,7 @@ const ChangePasswordForm = () => {
       </div>
 
       <h3 className="md:text-2xl text-lg font-medium text-start">
-        Old Password
+        New Password
       </h3>
       <div className="relative">
         <MyFormInput

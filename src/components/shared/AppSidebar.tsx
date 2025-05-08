@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -19,7 +20,10 @@ import {
   Contact,
 } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
+import { removeCookie } from "@/utils/cookies";
 
 const items = [
   {
@@ -56,6 +60,14 @@ const items = [
 
 const AppSidebar = () => {
   const pathName = usePathname();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleLolgout = () => {
+    dispatch(logout());
+    removeCookie("token");
+    router.push("/login");
+  };
   return (
     <Sidebar>
       <SidebarContent className="!bg-[#1C1C1C] text-white">
@@ -85,7 +97,16 @@ const AppSidebar = () => {
           </SidebarMenu>
         </SidebarGroupContent>
         <SidebarGroup />
+
       </SidebarContent>
+      <SidebarFooter className="!bg-[#1C1C1C] text-white">
+          <button
+            onClick={handleLolgout}
+            className="py-3 border border-red-400 rounded-lg font-medium text-base"
+          >
+            Log out
+          </button>
+        </SidebarFooter>
     </Sidebar>
   );
 };
