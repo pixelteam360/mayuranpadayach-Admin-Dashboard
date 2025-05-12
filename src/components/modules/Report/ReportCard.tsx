@@ -29,7 +29,7 @@ const ReportCard = () => {
                 width={100}
                 height={100}
                 className="h-10 w-10 rounded-full"
-              />  
+              />
               <p className="font-medium">Anonymous 00{idx + 1}</p>
             </div>
             <p className="text-[#B8B8B8] line-clamp-4 text-[14px]">
@@ -46,7 +46,7 @@ const ReportCard = () => {
             />
             <DeleteModal
               btn="btn"
-              type="user"
+              type="reviewReport"
               id={item?.id}
               btnText="View"
               message={item.message}

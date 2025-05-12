@@ -1,4 +1,5 @@
 import baseApi from "@/redux/api/baseApi";
+import { TQueryParams } from "@/types/global.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,14 +11,31 @@ export const userApi = baseApi.injectEndpoints({
       providesTags: ["OverView"],
     }),
 
-    // login: builder.mutation({
-    //   query: (credentials) => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //     body: credentials,
-    //   }),
-    //   invalidatesTags: ["User"],
-    // }),
+    getAllUser: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParams) =>
+            params.append(item.name, item.value as string)
+          );
+        }
+        return {
+          url: "/users",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["User"],
+    }),
+
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
+    }),
 
     // getMe: builder.query({
     //   query: () => ({
@@ -37,4 +55,5 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useOverViewQuery } = userApi;
+export const { useOverViewQuery, useGetAllUserQuery, useDeleteUserMutation } =
+  userApi;

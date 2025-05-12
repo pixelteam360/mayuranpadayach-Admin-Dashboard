@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
@@ -9,14 +8,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteProfilesMutation } from "@/redux/features/profile/profile.api";
-import { useRouter } from "next/navigation";
+import {
+  useDeleteProfileMutation,
+  useDeleteReportMutation,
+} from "@/redux/features/reviewAndPost/reviewAndPost.api";
+import { useDeleteUserMutation } from "@/redux/features/user/user.api";
 import { useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "sonner";
 
 interface DeleteModalProps {
   id: string;
-  type: "profile" | "user";
+  type: "profile" | "user" | "reviewReport" | "profileReport";
   btn: "icon" | "btn";
   message?: string;
   btnText?: string;
@@ -24,23 +27,28 @@ interface DeleteModalProps {
 
 const DeleteModal = ({ id, type, btn, message, btnText }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
-  const [deletProfile] = useDeleteProfilesMutation();
-  const router = useRouter();
+  const [deleteProfile] = useDeleteProfilesMutation();
+  const [deleteReview] = useDeleteReportMutation();
+  const [deleteUser] = useDeleteUserMutation();
+  const [deleteProfileReport] = useDeleteProfileMutation();
 
   const handleDelete = async () => {
     const toastId = toast.loading(`Deleting...`);
     try {
       let res;
       if (type === "profile") {
-        res = await deletProfile(id).unwrap();
+        res = await deleteProfile(id).unwrap();
+      } else if (type === "reviewReport") {
+        res = await deleteReview(id).unwrap();
       } else if (type === "user") {
-        // res = await deleteCause(id).unwrap();
+        res = await deleteUser(id).unwrap();
+      } else if (type === "profileReport") {
+        res = await deleteProfileReport(id).unwrap();
       }
 
       if (res.data) {
         toast.success("Deleted Successfully", { id: toastId });
         setOpen(false);
-        router.push("/");
       } else {
         toast.error(res?.error?.data?.message || "Failed to Delete", {
           id: toastId,

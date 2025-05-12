@@ -1,4 +1,5 @@
 import baseApi from "@/redux/api/baseApi";
+import { TQueryParams } from "@/types/global.type";
 
 export const reviewAndPostApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,31 +11,41 @@ export const reviewAndPostApi = baseApi.injectEndpoints({
       providesTags: ["Review"],
     }),
 
-    // login: builder.mutation({
-    //   query: (credentials) => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //     body: credentials,
-    //   }),
-    //   invalidatesTags: ["User"],
-    // }),
+    deleteReport: builder.mutation({
+      query: (id) => ({
+        url: `/reviews/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Review"],
+    }),
 
-    // getMe: builder.query({
-    //   query: () => ({
-    //     url: "/users/profile",
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["User"],
-    // }),
+    profileReports: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
 
-    // changePassword: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/auth/change-password",
-    //     method: "PUT",
-    //     body: data,
-    //   }),
-    // }),
+        if (args) {
+          args.forEach((item: TQueryParams) =>
+            params.append(item.name, item.value as string)
+          );
+        }
+        return {
+          url: "/profiles/report",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["ProfileReport"],
+    }),
+
+    deleteProfile: builder.mutation({
+      query: (id) => ({
+        url: `/profiles/report/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ProfileReport"],
+    }),
   }),
 });
 
-export const { useReviewReportsQuery } = reviewAndPostApi;
+export const { useReviewReportsQuery, useDeleteReportMutation, useProfileReportsQuery, useDeleteProfileMutation } =
+  reviewAndPostApi;
