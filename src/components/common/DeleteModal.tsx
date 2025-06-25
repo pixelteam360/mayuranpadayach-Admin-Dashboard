@@ -8,10 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteBusinessMutation } from "@/redux/features/businesses/businesses.api";
-import {
-  useDeleteProfileMutation,
-  useDeleteReportMutation,
-} from "@/redux/features/reviewAndPost/reviewAndPost.api";
 import { useDeleteUserMutation } from "@/redux/features/user/user.api";
 import { useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -28,9 +24,7 @@ interface DeleteModalProps {
 const DeleteModal = ({ id, type, btn, message, btnText }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
   const [deleteBusiness] = useDeleteBusinessMutation();
-  const [deleteReview] = useDeleteReportMutation();
   const [deleteUser] = useDeleteUserMutation();
-  const [deleteProfileReport] = useDeleteProfileMutation();
 
   const handleDelete = async () => {
     const toastId = toast.loading(`Deleting...`);
@@ -38,13 +32,9 @@ const DeleteModal = ({ id, type, btn, message, btnText }: DeleteModalProps) => {
       let res;
       if (type === "business") {
         res = await deleteBusiness(id).unwrap();
-      } else if (type === "reviewReport") {
-        res = await deleteReview(id).unwrap();
       } else if (type === "user") {
         res = await deleteUser(id).unwrap();
-      } else if (type === "profileReport") {
-        res = await deleteProfileReport(id).unwrap();
-      }
+      } 
 
       if (res.data) {
         toast.success("Deleted Successfully", { id: toastId });

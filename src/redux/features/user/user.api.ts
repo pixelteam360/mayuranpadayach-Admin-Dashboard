@@ -36,22 +36,6 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-
-    // getMe: builder.query({
-    //   query: () => ({
-    //     url: "/users/profile",
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["User"],
-    // }),
-
-    // changePassword: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/auth/change-password",
-    //     method: "PUT",
-    //     body: data,
-    //   }),
-    // }),
   }),
 });
 

@@ -3,7 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/shared/AppSidebar";
 
 export const metadata: Metadata = {
-  title: "Check Mate",
+  title: "Time Lify",
 };
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {

@@ -13,11 +13,11 @@ import {
 import logo from "../../assets/iamges/logo.png";
 import {
   SquareUser,
-  UserRoundX,
   Settings,
   ClipboardMinus,
   LayoutDashboardIcon,
-  Contact,
+  Shapes,
+  Building2,
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -39,7 +39,7 @@ const items = [
   {
     title: "Business List",
     url: "/business-list",
-    icon: Contact,
+    icon: Building2,
   },
   {
     title: "User List",
@@ -47,9 +47,9 @@ const items = [
     icon: SquareUser,
   },
   {
-    title: "Remove",
-    url: "/remove",
-    icon: UserRoundX,
+    title: "Category",
+    url: "/category",
+    icon: Shapes,
   },
   {
     title: "Setting",

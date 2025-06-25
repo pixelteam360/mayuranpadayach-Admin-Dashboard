@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Check Mate"
+  title: "Time Lify"
 };
 
 export default function RootLayout({
