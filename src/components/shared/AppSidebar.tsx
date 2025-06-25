@@ -32,17 +32,17 @@ const items = [
     icon: LayoutDashboardIcon,
   },
   {
-    title: "Report",
-    url: "/report",
+    title: "Booking List",
+    url: "/booking-list",
     icon: ClipboardMinus,
   },
   {
-    title: "Profile",
-    url: "/profile",
+    title: "Business List",
+    url: "/business-list",
     icon: Contact,
   },
   {
-    title: "User",
+    title: "User List",
     url: "/user",
     icon: SquareUser,
   },
@@ -70,10 +70,16 @@ const AppSidebar = () => {
   };
   return (
     <Sidebar>
-      <SidebarContent className="!bg-[#1C1C1C] text-white">
+      <SidebarContent className="!bg-gradient-to-t from-[#7B4BF5] to-[#BD5FF3] text-white">
         <SidebarGroup />
         <SidebarGroupLabel className="mb-14 mt-8 mx-auto">
-          <Image src={logo} alt="logo" width={190} height={50} />
+          <Image
+            src={logo}
+            alt="logo"
+            width={190}
+            height={50}
+            className="w-32"
+          />
         </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu className="px-4 space-y-3">
@@ -81,9 +87,9 @@ const AppSidebar = () => {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
-                  className={`text-[15px] font-bold px-4 ${
+                  className={`text-[15px] font-bold px-4  py-6 ${
                     pathName === `${item.url}`
-                      ? "bg-white text-black rounded-lg"
+                      ? "bg-white text-[#BD5FF3] rounded-lg"
                       : "text-white"
                   }`}
                 >
@@ -97,16 +103,15 @@ const AppSidebar = () => {
           </SidebarMenu>
         </SidebarGroupContent>
         <SidebarGroup />
-
       </SidebarContent>
-      <SidebarFooter className="!bg-[#1C1C1C] text-white">
-          <button
-            onClick={handleLolgout}
-            className="py-3 border border-red-400 rounded-lg font-medium text-base"
-          >
-            Log out
-          </button>
-        </SidebarFooter>
+      <SidebarFooter className="!bg-[#7B4BF5] text-white">
+        <button
+          onClick={handleLolgout}
+          className="py-3 border border-primary rounded-lg font-medium text-base"
+        >
+          Log out
+        </button>
+      </SidebarFooter>
     </Sidebar>
   );
 };

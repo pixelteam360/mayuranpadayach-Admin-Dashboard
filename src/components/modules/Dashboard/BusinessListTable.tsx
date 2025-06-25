@@ -9,18 +9,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { MoreVertical } from "lucide-react";
-import { useProfilesQuery } from "@/redux/features/profile/profile.api";
+import { useAllBusinessesQuery } from "@/redux/features/businesses/businesses.api";
 import Spinner from "@/components/common/Spinner";
 import DeleteModal from "@/components/common/DeleteModal";
 
-type FlagCounts = {
-  redFlag: number;
-  yellowFlag: number;
-  greenFlag: number;
-};
 
-const TopFlagUserTable = () => {
-  const { data, isFetching } = useProfilesQuery(undefined);
+const BusinessListTable = () => {
+  const { data, isFetching } = useAllBusinessesQuery(undefined);
 
   if (isFetching) {
     return <Spinner />;
@@ -34,9 +29,9 @@ const TopFlagUserTable = () => {
         <div className="min-w-[700px]">
           {/* Header */}
           <div className="grid grid-cols-5 px-6 py-3 text-sm font-semibold rounded-t-xl">
-            <span>Profile</span>
-            <span>Flag</span>
-            <span>Relation Status</span>
+            <span>Business</span>
+            <span>Contact Number</span>
+            <span>Rating</span>
             <span>Address</span>
             <span></span>
           </div>
@@ -57,20 +52,18 @@ const TopFlagUserTable = () => {
                     className="h-10 w-10 rounded-full"
                   />
                   <span className="text-gray-800 font-medium">
-                    {item?.fullName}
+                    {item?.name}
                   </span>
                 </div>
 
                 <div className="font-bold">
-                  {Object.entries((item?.flagCounts as FlagCounts) || {})
-                    .sort((a, b) => b[1] - a[1])[0]?.[0]
-                    ?.replace("Flag", "")
-                    ?.toUpperCase() || "N/A"}
+                  {item?.contactNumber}
+                </div>
+                <div className="font-bold">
+                  {item?.overallRating}
                 </div>
 
-                <div className="text-gray-500">{item?.maritalStatus} </div>
-
-                <div className="text-gray-700 text-sm">{item?.location}</div>
+                <div className="text-gray-700 text-sm">{item?.address}</div>
 
                 <div className="text-gray-400 text-xl cursor-pointer flex justify-end">
                   <DropdownMenu>
@@ -81,12 +74,12 @@ const TopFlagUserTable = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DeleteModal
-                          id={item.id}
-                          btn="btn"
-                          btnText="Delete Profile"
-                          type="profile"
-                        />
+                      <DeleteModal
+                        id={item.id}
+                        btn="btn"
+                        btnText="Delete Business"
+                        type="business"
+                      />
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
@@ -99,4 +92,4 @@ const TopFlagUserTable = () => {
   );
 };
 
-export default TopFlagUserTable;
+export default BusinessListTable;

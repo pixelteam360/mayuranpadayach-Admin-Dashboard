@@ -27,10 +27,11 @@ const UserTable = () => {
       <div className="overflow-x-auto">
         <div className="min-w-[700px]">
           {/* Header */}
-          <div className="grid grid-cols-4 px-6 py-3 text-sm font-semibold rounded-t-xl">
+          <div className="grid grid-cols-5 px-6 py-3 text-sm font-semibold rounded-t-xl">
             <span>Profile</span>
             <span>Email</span>
-            <span>Address</span>
+            <span>Phone Number</span>
+            <span>Role</span>
             <span></span>
           </div>
 
@@ -39,11 +40,11 @@ const UserTable = () => {
             {userData.map((item: any) => (
               <div
                 key={item.id}
-                className="grid grid-cols-4 items-center gap-4 bg-white/30 px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all"
+                className="grid grid-cols-5 items-center gap-4 bg-white/30 px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-center gap-3">
                   <Image
-                    src={item.image || userIcon}
+                    src={item.profileImage || userIcon}
                     alt="user"
                     width={100}
                     height={100}
@@ -54,10 +55,11 @@ const UserTable = () => {
                   </span>
                 </div>
 
-                <div className="font-bold">{item?.email}</div>
+                <div>{item?.email}</div>
+                <div>{item?.phoneNumber || "N/A"}</div>
 
                 <div className="text-gray-700 text-sm">
-                  {item?.location || "N/A"}
+                  {item?.role || "N/A"}
                 </div>
 
                 <div className="text-gray-400 text-xl cursor-pointer flex justify-end">

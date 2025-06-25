@@ -12,9 +12,10 @@ const MyProfile = () => {
   }
 
   const userData = data?.data;
+
   return (
     <div className="flex w-full justify-center items-center py-5">
-      <div className="md:w-1/2 bg-gradient-to-b from-[#f2f8f2] to-[#fafafa] md:p-12 p-5 md:rounded-3xl rounded-2xl border-[3px] border-white text-center md:space-y-7 space-y-4">
+      <div className="md:w-1/2 bg-white/40 md:p-12 p-5 md:rounded-3xl rounded-2xl border-[3px] border-white text-center md:space-y-7 space-y-4">
         <div className="rounded-full overflow-hidden flex justify-center">
           <Image
             src={userData?.image || userImg}

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useDeleteProfilesMutation } from "@/redux/features/profile/profile.api";
+import { useDeleteBusinessMutation } from "@/redux/features/businesses/businesses.api";
 import {
   useDeleteProfileMutation,
   useDeleteReportMutation,
@@ -19,7 +19,7 @@ import { toast } from "sonner";
 
 interface DeleteModalProps {
   id: string;
-  type: "profile" | "user" | "reviewReport" | "profileReport";
+  type: "business" | "user" | "reviewReport" | "profileReport";
   btn: "icon" | "btn";
   message?: string;
   btnText?: string;
@@ -27,7 +27,7 @@ interface DeleteModalProps {
 
 const DeleteModal = ({ id, type, btn, message, btnText }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
-  const [deleteProfile] = useDeleteProfilesMutation();
+  const [deleteBusiness] = useDeleteBusinessMutation();
   const [deleteReview] = useDeleteReportMutation();
   const [deleteUser] = useDeleteUserMutation();
   const [deleteProfileReport] = useDeleteProfileMutation();
@@ -36,8 +36,8 @@ const DeleteModal = ({ id, type, btn, message, btnText }: DeleteModalProps) => {
     const toastId = toast.loading(`Deleting...`);
     try {
       let res;
-      if (type === "profile") {
-        res = await deleteProfile(id).unwrap();
+      if (type === "business") {
+        res = await deleteBusiness(id).unwrap();
       } else if (type === "reviewReport") {
         res = await deleteReview(id).unwrap();
       } else if (type === "user") {

@@ -37,7 +37,7 @@ const RemoveProfileTable = () => {
 
           {/* Rows */}
           <div className="space-y-4 mt-2">
-            {profileData.map((item: any) => (
+            {profileData?.map((item: any) => (
               <div
                 key={item.id}
                 className="grid grid-cols-4 items-center gap-4 bg-white/30 px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all"

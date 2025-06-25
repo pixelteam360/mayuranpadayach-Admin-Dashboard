@@ -10,7 +10,7 @@ const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="max-w-7xl px-5 mx-auto bg-gradient-to-t from-[#EEEFDA] to-[#D2DBDD] w-full">
+      <main className="max-w-7xl px-5 mx-auto w-full">
         <SidebarTrigger />
         {children}
       </main>

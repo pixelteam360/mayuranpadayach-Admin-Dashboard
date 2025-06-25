@@ -21,7 +21,7 @@ export const userApi = baseApi.injectEndpoints({
           );
         }
         return {
-          url: "/users",
+          url: "/users/all",
           method: "GET",
           params: params,
         };

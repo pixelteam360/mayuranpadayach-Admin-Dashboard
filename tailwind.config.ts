@@ -14,8 +14,8 @@ export default {
   			background: "bg-gradient-to-r from-[#D2DBDD] to-[#EEEFDA]",
   			foreground: 'hsl(var(--foreground))',
   			primary: {
-  				DEFAULT: '#1C1C1C',
-  				foreground: '#1C1C1C'
+  				DEFAULT: '#BD5FF3',
+  				foreground: '#BD5FF3'
   			},
   			secondary: {
   				DEFAULT: '#EA3526',
