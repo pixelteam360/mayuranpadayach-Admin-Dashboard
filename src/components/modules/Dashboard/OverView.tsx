@@ -25,7 +25,7 @@ const OverView = () => {
             <BookMarked />
             <p className="text-grayText">Total Booking</p>
           </div>
-          <h1 className="text-[32px] font-bold">{overView?.totalProfile}</h1>
+          <h1 className="text-[32px] font-bold">{overView?.totalBooking}</h1>
         </div>
 
         <div className="bg-white p-6 rounded-2xl border-2 border-[#e2d6ff] flex justify-between gap-2">
@@ -34,7 +34,7 @@ const OverView = () => {
             <p className="text-grayText">Total Business</p>
           </div>
           <h1 className="text-[32px] font-bold">
-            {overView?.totalReviewReport}
+            {overView?.totalBusiness}
           </h1>
         </div>
 
@@ -44,7 +44,7 @@ const OverView = () => {
             <p className="text-grayText">Total Worker</p>
           </div>
           <h1 className="text-[32px] font-bold">
-            {overView?.totalProfileReport}
+            {overView?.totalWorker}
           </h1>
         </div>
       </div>

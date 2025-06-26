@@ -5,7 +5,7 @@ export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     overView: builder.query({
       query: () => ({
-        url: "/users/admin-overview",
+        url: "/auth/dashboard",
         method: "GET",
       }),
       providesTags: ["OverView"],
