@@ -63,6 +63,14 @@ export const businessesApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Category"],
     }),
+
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `/categories/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Category"],
+    }),
   }),
 });
 
@@ -71,5 +79,6 @@ export const {
   useDeleteBusinessMutation,
   useBookingListQuery,
   useCreateCategoryMutation,
-  useAllCategoryQuery
+  useAllCategoryQuery,
+  useDeleteCategoryMutation
 } = businessesApi;
